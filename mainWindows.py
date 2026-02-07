@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import QMainWindow, QPushButton, QLabel
 from PyQt6.QtCore import QRect, Qt
 from watch import Watch
 from PyQt6.QtGui import QFont, QFontDatabase
+from film import Film
 
 import sqlite3
 
@@ -15,7 +16,7 @@ class MainWindow(QMainWindow):
 
         self.setGeometry(QRect(300, 200, width - 600, height - 400))
 
-        self.setStyleSheet("border-image: url(1.jpg) 0 0 0 0  ;")
+        self.setStyleSheet("border-image: url(mainBackground.jpg) 0 0 0 0  ;")
         self.setWindowFlag(Qt.WindowType.FramelessWindowHint)
 
         self.con = sqlite3.connect('main.db')
@@ -33,10 +34,10 @@ class MainWindow(QMainWindow):
         self.watch.resize(400, 250)
         self.exit.resize(400, 250)
 
-        self.watch.setStyleSheet("QPushButton{border-image: url(2.png) 0 0 0 0  ; color: #ff384d;}"
-                                 "QPushButton:hover{border-image: url(3.png) 0 0 0 0  ;}")
-        self.exit.setStyleSheet("QPushButton{border-image: url(2.png) 0 0 0 0  ; color: #ff384d;}"
-                                "QPushButton:hover{border-image: url(3.png) 0 0 0 0  ;}")
+        self.watch.setStyleSheet("QPushButton{border-image: url(mainButton.png) 0 0 0 0  ; color: #ff384d;}"
+                                 "QPushButton:hover{border-image: url(mainButtonHover.png) 0 0 0 0  ;}")
+        self.exit.setStyleSheet("QPushButton{border-image: url(mainButton.png) 0 0 0 0  ; color: #ff384d;}"
+                                "QPushButton:hover{border-image: url(mainButtonHover.png) 0 0 0 0  ;}")
 
         self.watch.move(750, 200)
         self.exit.move(750, 550)
@@ -47,6 +48,7 @@ class MainWindow(QMainWindow):
         self.watch.clicked.connect(self.watch_func)
         self.exit.clicked.connect(self.exitfunc)
 
+        self.film = Film(self.width, self.height, self)
         self.c = Watch(self.width, self.height, self)
 
     def watch_func(self):
